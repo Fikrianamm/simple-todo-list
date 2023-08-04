@@ -1,0 +1,80 @@
+<%- include('partials/header.ejs')%>
+<div class="container">
+  <div class="wrapper m-auto d-flex flex-column gap-4 justify-content-center">
+    <nav class="d-flex gap-2">
+      <button
+        id="home"
+        type="button"
+        class="btn-work btn-sm btn btn-secondary position-relative"
+      >
+        <i class="bi bi-caret-left"></i>
+      </button>
+      <button
+        id="today"
+        type="button"
+        class="btn-today btn-sm btn btn-secondary position-relative"
+      >
+        <i class="bi bi-calendar-event"></i>
+        Today
+      </button>
+      <button
+        id="work"
+        type="button"
+        class="btn-work btn-sm btn btn-secondary position-relative"
+      >
+        <i class="bi bi-stickies"></i>
+        Work
+      </button>
+    </nav>
+    <form action="/work/buat" method="POST" class="row">
+      <div class="col-9">
+        <input
+          class="form-control bg-transparent text-light"
+          type="text"
+          placeholder="Masukkan nama kegiatan"
+          aria-label="default input example"
+          name="task"
+        />
+      </div>
+      <div class="col-3">
+        <input
+          type="submit"
+          value="Buat"
+          id="buat"
+          class="btn btn-secondary w-100"
+        />
+      </div>
+    </form>
+    <hr class="text-light" />
+    <ul class="list-group">
+      <% if(locals.tasks){ tasks.forEach(element => {if
+      (element.type=='work'){%>
+      <li class="list-group-item bg-transparent text-light border-light">
+        <input
+          class="form-check-input me-1"
+          id="<%= element.id%>"
+          type="checkbox"
+          value=""
+        />
+        <label class="form-check-label" for="<%= element.id%>"
+          ><%= element.task%>
+        </label>
+      </li>
+      <%}});}%>
+    </ul>
+  </div>
+</div>
+<script>
+  const btnHome = document.querySelector("#home");
+  const checkbox = document.querySelectorAll(".form-check-input");
+  btnHome.addEventListener("click", () => {
+    window.location.href = "/";
+  });
+
+  checkbox.forEach((item) => {
+    item.addEventListener("change", () => {
+      item.nextElementSibling.classList.toggle("text-decoration-line-through");
+    });
+  });
+</script>
+<%- include('partials/footer.ejs')%>
