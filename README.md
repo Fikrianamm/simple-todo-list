@@ -21,6 +21,7 @@ This project is built with:
 - Express.js
 - EJS
 - Bootstrap 
+
 This todo list consists of 2 types for recording what needs to be done today and keeping track of tasks for work.
 
 ## Getting Started
